@@ -4,7 +4,9 @@ import com.smida.stockregister.dto.StockDto;
 import com.smida.stockregister.service.StockService;
 import com.smida.stockregister.util.ConvertDtoToEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +20,11 @@ public class StockController {
 
     @PostMapping("/add")
     public void create(@RequestBody StockDto stockDto) {
-        stockService.createStock(ConvertDtoToEntity.convertStockDtoToStock(stockDto));
+        stockService.saveStock(ConvertDtoToEntity.convertStockDtoToStock(stockDto));
+    }
+
+    @PutMapping("/{StockId}")
+    public void update(@PathVariable("StockId") Long stockId, @RequestBody StockDto stockDto) {
+        stockService.updateById(stockId, stockDto);
     }
 }
