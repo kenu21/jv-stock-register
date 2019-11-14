@@ -2,7 +2,7 @@ package com.smida.stockregister.controller;
 
 import com.smida.stockregister.dto.StockDto;
 import com.smida.stockregister.service.StockService;
-import com.smida.stockregister.util.ConvertDtoToEntity;
+import com.smida.stockregister.util.Convert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +20,7 @@ public class StockController {
 
     @PostMapping("/add")
     public void create(@RequestBody StockDto stockDto) {
-        stockService.saveStock(ConvertDtoToEntity.convertStockDtoToStock(stockDto));
+        stockService.saveStock(Convert.convertStockDtoToStock(stockDto));
     }
 
     @PutMapping("/{StockId}")
