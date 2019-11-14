@@ -38,4 +38,18 @@ public class Stock {
         this.dutyPaid = dutyPaid;
         this.releaseDate = releaseDate;
     }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+        totalPrice = amount * price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+        totalPrice = amount * price;
+    }
+
+    private void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 }
