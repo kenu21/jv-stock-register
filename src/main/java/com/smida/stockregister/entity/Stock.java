@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class Stocks {
+public class Stock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +26,16 @@ public class Stocks {
     private Double price; // It's requirement
     private Double dutyPaid; // It's requirement
     private LocalDate releaseDate;
+
+    public Stock(String comment, Integer sizeOfCapital, Integer edrpou, Integer amount,
+                 Double price, Double dutyPaid, LocalDate releaseDate) {
+        this.comment = comment;
+        this.sizeOfCapital = sizeOfCapital;
+        this.edrpou = edrpou;
+        this.amount = amount;
+        this.totalPrice = amount * price;
+        this.price = price;
+        this.dutyPaid = dutyPaid;
+        this.releaseDate = releaseDate;
+    }
 }
