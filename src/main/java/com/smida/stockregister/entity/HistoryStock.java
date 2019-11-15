@@ -25,7 +25,7 @@ public class HistoryStock {
     private Integer amount;
     private Double totalPrice; // It's requirement
     private Double price; // It's requirement
-    private Double dutyPaid; // It's requirement
+    private Double durtyPaid; // It's requirement
     private LocalDate releaseDate;
 
     public HistoryStock(Long originId, String comment, Integer sizeOfCapital,Integer edrpou,
@@ -37,7 +37,7 @@ public class HistoryStock {
         this.amount = amount;
         this.totalPrice = amount * price;
         this.price = price;
-        this.dutyPaid = dutyPaid;
+        this.durtyPaid = dutyPaid;
         this.releaseDate = releaseDate;
     }
 
