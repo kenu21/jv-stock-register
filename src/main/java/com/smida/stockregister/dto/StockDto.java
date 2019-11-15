@@ -13,6 +13,6 @@ public class StockDto {
     private Integer edrpou;
     private Integer amount;
     private Double price; // It's requirement
-    private Double dutyPaid; // It's requirement
+    private Double durtyPaid; // It's requirement
     private LocalDate releaseDate;
 }
