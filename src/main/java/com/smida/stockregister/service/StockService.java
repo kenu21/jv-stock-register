@@ -5,12 +5,12 @@ import com.smida.stockregister.entity.Stock;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+
 public interface StockService {
     Stock saveStock(Stock stock);
 
     Stock updateById(Long stockId, StockDto stockDto);
 
-    List<Stock> getPublicData();
-
-    List<Stock> getPrivateData();
+    List<Stock> getAll(Pageable pageable);
 }
