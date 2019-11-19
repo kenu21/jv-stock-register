@@ -8,12 +8,16 @@ import com.smida.stockregister.util.Convert;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -34,12 +38,32 @@ public class StockController {
     }
 
     @GetMapping("/getPublicData")
-    public List<Stock> getPublicData() {
-        return stockService.getPublicData();
+    public List<Stock> getPublicData(@RequestParam(value = "page", required = false,
+            defaultValue = "0") Integer page,
+                                     @RequestParam(value = "limit", required = false,
+                                             defaultValue = "10") Integer limit,
+                                     @RequestParam(value = "sortBy", required = false,
+                                             defaultValue = "id") String sortBy,
+                                     @RequestParam(value = "sortOrder", required = false,
+                                             defaultValue = "asc") String sortOrder) {
+        return getAll(page, limit, sortBy, sortOrder);
     }
 
     @GetMapping("/getPrivateData")
-    public List<Stock> getPrivateData() {
-        return stockService.getPrivateData();
+    public List<Stock> getPrivateData(@RequestParam(value = "page", required = false,
+            defaultValue = "0") Integer page,
+                                      @RequestParam(value = "limit", required = false,
+                                              defaultValue = "10") Integer limit,
+                                      @RequestParam(value = "sortBy", required = false,
+                                              defaultValue = "id") String sortBy,
+                                      @RequestParam(value = "sortOrder", required = false,
+                                              defaultValue = "asc") String sortOrder) {
+        return getAll(page, limit, sortBy, sortOrder);
+    }
+
+    private List<Stock> getAll(Integer page, Integer limit, String sortBy, String sortOrder) {
+        Sort.Direction direction = Sort.Direction.fromString(sortOrder);
+        Pageable pageRequest = PageRequest.of(page, limit, Sort.by(direction, sortBy));
+        return stockService.getAll(pageRequest);
     }
 }

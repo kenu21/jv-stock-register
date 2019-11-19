@@ -10,6 +10,7 @@ import com.smida.stockregister.util.Convert;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -43,21 +44,8 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public List<Stock> getPublicData() {
-        List<Stock> all = stockRepository.findAll();
-        for (int i = 0; i < all.size(); i++) {
-            all.get(i).setComment(null);
-            all.get(i).setDurtyPaid(null);
-            all.get(i).setEdrpou(null);
-            all.get(i).setSizeOfCapital(null);
-            all.get(i).setHistoryStock(null);
-        }
-        return all;
-    }
-
-    @Override
-    public List<Stock> getPrivateData() {
-        return stockRepository.findAll();
+    public List<Stock> getAll(Pageable pageable) {
+        return stockRepository.findAll(pageable).getContent();
     }
 
     private Stock getStockById(Long stockId) {
