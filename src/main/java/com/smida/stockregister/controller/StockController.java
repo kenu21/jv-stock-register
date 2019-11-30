@@ -1,5 +1,7 @@
 package com.smida.stockregister.controller;
 
+import com.smida.stockregister.dto.PrivateDataStockResponseDto;
+import com.smida.stockregister.dto.PublicDataStockResponseDto;
 import com.smida.stockregister.dto.StockDto;
 import com.smida.stockregister.entity.Stock;
 import com.smida.stockregister.service.StockService;
@@ -38,27 +40,29 @@ public class StockController {
     }
 
     @GetMapping("/getPublicData")
-    public List<Stock> getPublicData(@RequestParam(value = "page", required = false,
-            defaultValue = "0") Integer page,
-                                     @RequestParam(value = "limit", required = false,
-                                             defaultValue = "10") Integer limit,
-                                     @RequestParam(value = "sortBy", required = false,
-                                             defaultValue = "id") String sortBy,
-                                     @RequestParam(value = "sortOrder", required = false,
-                                             defaultValue = "asc") String sortOrder) {
-        return getAll(page, limit, sortBy, sortOrder);
+    public List<PublicDataStockResponseDto> getPublicData(
+            @RequestParam(value = "page", required = false,
+                    defaultValue = "0") Integer page,
+            @RequestParam(value = "limit", required = false,
+                    defaultValue = "10") Integer limit,
+            @RequestParam(value = "sortBy", required = false,
+                    defaultValue = "id") String sortBy,
+            @RequestParam(value = "sortOrder", required = false,
+                    defaultValue = "asc") String sortOrder) {
+        return Convert.convertStockToPublicStock(getAll(page, limit, sortBy, sortOrder));
     }
 
     @GetMapping("/getPrivateData")
-    public List<Stock> getPrivateData(@RequestParam(value = "page", required = false,
-            defaultValue = "0") Integer page,
-                                      @RequestParam(value = "limit", required = false,
-                                              defaultValue = "10") Integer limit,
-                                      @RequestParam(value = "sortBy", required = false,
-                                              defaultValue = "id") String sortBy,
-                                      @RequestParam(value = "sortOrder", required = false,
-                                              defaultValue = "asc") String sortOrder) {
-        return getAll(page, limit, sortBy, sortOrder);
+    public List<PrivateDataStockResponseDto> getPrivateData(
+            @RequestParam(value = "page", required = false,
+                    defaultValue = "0") Integer page,
+            @RequestParam(value = "limit", required = false,
+                    defaultValue = "10") Integer limit,
+            @RequestParam(value = "sortBy", required = false,
+                    defaultValue = "id") String sortBy,
+            @RequestParam(value = "sortOrder", required = false,
+                    defaultValue = "asc") String sortOrder) {
+        return Convert.convertStockToPrivateStock(getAll(page, limit, sortBy, sortOrder));
     }
 
     private List<Stock> getAll(Integer page, Integer limit, String sortBy, String sortOrder) {
