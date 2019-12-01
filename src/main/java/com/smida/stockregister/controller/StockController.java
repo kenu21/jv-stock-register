@@ -65,6 +65,18 @@ public class StockController {
         return Convert.convertStockToPrivateStock(getAll(page, limit, sortBy, sortOrder));
     }
 
+    @GetMapping("/getPrivateDataByEdrpou")
+    public List<PrivateDataStockResponseDto> getPrivateDataByEdrpou(
+            @PathVariable("edrpou") Integer edrpou) {
+        return Convert.convertStockToPrivateStock(stockService.findAllByEdrpou(edrpou));
+    }
+
+    @GetMapping("/getPublicDataByEdrpou")
+    public List<PublicDataStockResponseDto> getPublicDataByEdrpou(
+            @PathVariable("edrpou") Integer edrpou) {
+        return Convert.convertStockToPublicStock(stockService.findAllByEdrpou(edrpou));
+    }
+
     private List<Stock> getAll(Integer page, Integer limit, String sortBy, String sortOrder) {
         Sort.Direction direction = Sort.Direction.fromString(sortOrder);
         Pageable pageRequest = PageRequest.of(page, limit, Sort.by(direction, sortBy));
