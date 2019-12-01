@@ -13,4 +13,6 @@ public interface StockService {
     Stock updateById(Long stockId, StockDto stockDto);
 
     List<Stock> getAll(Pageable pageable);
+
+    List<Stock> findAllByEdrpou(Integer edrpou);
 }

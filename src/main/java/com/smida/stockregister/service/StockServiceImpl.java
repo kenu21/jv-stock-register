@@ -48,6 +48,11 @@ public class StockServiceImpl implements StockService {
         return stockRepository.findAll(pageable).getContent();
     }
 
+    @Override
+    public List<Stock> findAllByEdrpou(Integer edrpou) {
+        return stockRepository.findAllByEdrpou(edrpou);
+    }
+
     private Stock getStockById(Long stockId) {
         Stock stock = stockRepository.getOne(stockId);
         return stock;
